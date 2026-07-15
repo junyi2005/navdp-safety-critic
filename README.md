@@ -9,10 +9,6 @@ with no map building.
 
 ## Status
 
-Reference implementation of the method as described in the paper. The benchmark
-numbers reported in the paper predate this implementation; they are being
-regenerated against it, and the tables will be updated from those runs.
-
 The components are unit- and integration-tested on synthetic scenes (see
 `tests/`), and both training stages run end to end. Training on real collected
 data requires the extra dependencies below.
@@ -84,25 +80,24 @@ Two dependencies are not on PyPI and must be installed separately:
 
 ## Data
 
-Training data comes from the companion repository
-**[data-collection](https://github.com/junyi2005/data-collection)**,
-which builds on [habitat-lab](https://github.com/facebookresearch/habitat-lab)
-and is kept separate for that reason. It collects paired RGB-D observations and
-smooth navigable trajectories from HM3D, MP3D and Gibson:
+Training data is collected with a companion Habitat-based tool — **coming
+soon**. It samples random start–goal pairs with automatic per-floor detection,
+plans over the habitat-sim navmesh, smooths the path with a cubic spline and an
+obstacle-clearance pass, and records RGB-D along it with randomized camera
+height and pitch.
 
-- random start–goal sampling with automatic per-floor detection,
-- shortest-path planning over the habitat-sim navmesh,
-- cubic-spline smoothing with obstacle-clearance refinement,
-- domain randomization of camera height and pitch.
+`NavDPDataset` expects one folder per scene, holding:
 
-It writes one folder per scene (`rgb.pkl`, `depth.pkl`, `traj.pkl`,
-`episode_info.pkl`), which is exactly the layout `NavDPDataset` expects — point
-`--data_root` at the directory holding them.
+| File | Contents |
+|---|---|
+| `rgb.pkl` | `dict[step_key] -> uint8 [H, W, 3]` |
+| `depth.pkl` | `dict[step_key] -> float32 [H, W]`, metres |
+| `traj.pkl` | `dict[step_key] -> float32 [7]`: `[x, y, z, yaw, pitch, roll, camera_height]` |
+| `episode_info.pkl` | list of per-episode dicts |
 
-```bash
-git clone https://github.com/junyi2005/data-collection
-# see its docs/data_collection.md for the collection walkthrough
-```
+`step_key` is `ep{episode:03d}_step{step:02d}`; columns 0, 2, 3 of `traj.pkl`
+are read as the planar pose `(x, z, yaw)`. Any collector producing this layout
+works — point `--data_root` at the directory holding the scene folders.
 
 ## Usage
 

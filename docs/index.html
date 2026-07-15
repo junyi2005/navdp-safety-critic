@@ -56,11 +56,6 @@ h1{font-size:clamp(30px,4.6vw,52px);line-height:1.12;letter-spacing:-.025em;
 .authors a{text-decoration:none}
 .affil{color:var(--muted);font-size:15px;margin:0 0 4px}
 .note{color:var(--dim);font-size:13.5px;margin:0}
-/* Qualifies the numbers beside it: legible and findable, but a footnote in
-   weight rather than a banner. */
-#results .note{
-  max-width:70ch; margin:-14px auto 30px; text-align:center; line-height:1.6;
-}
 .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:30px}
 .btn{display:inline-flex;align-items:center;gap:8px;background:var(--surface-2);
   border:1px solid var(--line);color:var(--text);text-decoration:none;
@@ -138,6 +133,7 @@ tbody tr:last-child td{border-bottom:0}
 .card ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px}
 .card ul li{margin:3px 0}
 .card .go{margin-top:4px}
+.card .go .soon{color:var(--dim)}
 pre{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
   padding:18px;overflow-x:auto;font-size:13px;line-height:1.55;
   font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--muted);margin:0}
@@ -237,9 +233,6 @@ footer p{max-width:78ch;margin:0 0 8px}
   <p class="lede">300 episodes per policy, identical start–goal pairs across all methods, 500-step timeout.
     Cross-dataset transfer is HM3D&nbsp;→&nbsp;MP3D.</p>
 
-  <p class="note" role="note">These numbers predate the <a href="#code">released implementation</a>
-    and are being regenerated against it; the tables will be updated from those runs.</p>
-
   <div class="scroller">
   <table>
     <caption>Success rate (SR) and success weighted by path length (SPL); higher is better.</caption>
@@ -305,8 +298,8 @@ footer p{max-width:78ch;margin:0 0 8px}
 <section id="code"><div class="wrap">
   <p class="kicker">Open source</p>
   <h2>Code</h2>
-  <p class="lede">Released in two parts: the Habitat-based data collection used to build the training
-    set, and the training code for the diffusion generator and the safety critic.</p>
+  <p class="lede">The training code for the diffusion generator and the safety critic is available
+    now; the Habitat-based data collection follows.</p>
 
   <div class="repos">
     <div class="card">
@@ -320,7 +313,7 @@ footer p{max-width:78ch;margin:0 0 8px}
         <li>Cubic-spline smoothing and obstacle-clearance refinement</li>
         <li>Domain randomization of camera height and pitch</li>
       </ul>
-      <p class="go"><a href="https://github.com/junyi2005/data-collection" target="_blank" rel="noopener">Repository →</a></p>
+      <p class="go"><span class="soon">Repository — coming soon</span></p>
     </div>
 
     <div class="card">

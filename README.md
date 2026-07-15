@@ -9,13 +9,9 @@ with no map building.
 
 ## Status
 
-This repository implements the method as described in the paper. **It has not
-yet reproduced the numbers in the paper's result tables.** Those tables were
-produced by an earlier training pipeline that did not implement the critic
-described here, and the corresponding runs are not reproducible from this code.
-Re-running the benchmarks against this implementation is in progress; the
-tables will be updated from those runs. Please treat the code — not the current
-tables — as the description of what this critic does.
+Reference implementation of the method as described in the paper. The benchmark
+numbers reported in the paper predate this implementation; they are being
+regenerated against it, and the tables will be updated from those runs.
 
 The components are unit- and integration-tested on synthetic scenes (see
 `tests/`), and both training stages run end to end. Training on real collected

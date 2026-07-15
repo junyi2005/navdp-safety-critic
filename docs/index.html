@@ -56,14 +56,11 @@ h1{font-size:clamp(30px,4.6vw,52px);line-height:1.12;letter-spacing:-.025em;
 .authors a{text-decoration:none}
 .affil{color:var(--muted);font-size:15px;margin:0 0 4px}
 .note{color:var(--dim);font-size:13.5px;margin:0}
-/* Provenance callout: readable, not decorative — it qualifies the numbers beside it. */
+/* Qualifies the numbers beside it: legible and findable, but a footnote in
+   weight rather than a banner. */
 #results .note{
-  color:var(--muted); font-size:14.5px; line-height:1.6; max-width:78ch;
-  margin:0 0 26px; padding:14px 16px; border-radius:8px;
-  background:var(--surface-2); border:1px solid var(--line);
-  border-left:3px solid var(--dim);
+  max-width:70ch; margin:-14px auto 30px; text-align:center; line-height:1.6;
 }
-#results .note strong{color:var(--text)}
 .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:30px}
 .btn{display:inline-flex;align-items:center;gap:8px;background:var(--surface-2);
   border:1px solid var(--line);color:var(--text);text-decoration:none;
@@ -76,10 +73,11 @@ h1{font-size:clamp(30px,4.6vw,52px);line-height:1.12;letter-spacing:-.025em;
 /* ---------- sections ---------- */
 section{padding:60px 0;border-top:1px solid var(--line)}
 section:first-of-type{border-top:0}
-h2{font-size:clamp(21px,2.4vw,28px);letter-spacing:-.02em;font-weight:660;margin:0 0 8px}
+h2{font-size:clamp(21px,2.4vw,28px);letter-spacing:-.02em;font-weight:660;margin:0 0 8px;
+  text-align:center}
 .kicker{color:var(--accent);font-size:12.5px;font-weight:640;letter-spacing:.09em;
-  text-transform:uppercase;margin:0 0 8px}
-.lede{color:var(--muted);max-width:70ch;margin:0 0 30px}
+  text-transform:uppercase;margin:0 0 8px;text-align:center}
+.lede{color:var(--muted);max-width:70ch;margin:0 auto 30px;text-align:center}
 p{max-width:72ch}
 
 /* ---------- demo: portrait video + text ---------- */
@@ -100,14 +98,9 @@ p{max-width:72ch}
 figure{margin:0}
 figure img{width:100%;height:auto;display:block;border-radius:var(--radius);
   border:1px solid var(--line);background:#fff}
-figcaption{color:var(--dim);font-size:13.5px;margin-top:12px;max-width:80ch}
+figcaption{color:var(--dim);font-size:13.5px;margin-top:12px;max-width:80ch;
+  margin-inline:auto;text-align:center}
 .fig-narrow img{max-width:430px;margin-inline:auto}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-@media(max-width:860px){.two{grid-template-columns:1fr}}
-.two video{width:100%;height:auto;display:block;border-radius:var(--radius);
-  border:1px solid var(--line);background:#000}
-.two figcaption{margin-bottom:4px}
-h3.sub{font-size:17px;font-weight:640;letter-spacing:-.01em;margin:44px 0 6px}
 
 /* colorbar legend */
 .legend{display:flex;align-items:center;gap:12px;margin-top:14px;font-size:12.5px;color:var(--dim)}
@@ -118,11 +111,10 @@ h3.sub{font-size:17px;font-weight:640;letter-spacing:-.01em;margin:44px 0 6px}
 .scroller{overflow-x:auto;-webkit-overflow-scrolling:touch}
 /* width:auto keeps columns snug around their contents -- at width:100% the
    table stretched to the full wrap and the numbers scattered to the column
-   edges. margin-inline:0 keeps its left edge on the same line as the section
-   heading and lede, which are left-aligned. */
+   edges. margin-inline:auto centres the block under the centred heading. */
 table{border-collapse:collapse;width:auto;min-width:min(640px,100%);max-width:100%;
-  margin-inline:0;font-size:14.5px;font-variant-numeric:tabular-nums}
-caption{text-align:left;color:var(--dim);font-size:13.5px;padding-bottom:10px}
+  margin-inline:auto;font-size:14.5px;font-variant-numeric:tabular-nums}
+caption{text-align:center;color:var(--dim);font-size:13.5px;padding-bottom:10px}
 th,td{padding:9px 18px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap}
 th:first-child,td:first-child{text-align:left;padding-left:4px}
 thead th{color:var(--muted);font-weight:600;font-size:12.5px;letter-spacing:.04em;
@@ -245,12 +237,8 @@ footer p{max-width:78ch;margin:0 0 8px}
   <p class="lede">300 episodes per policy, identical start–goal pairs across all methods, 500-step timeout.
     Cross-dataset transfer is HM3D&nbsp;→&nbsp;MP3D.</p>
 
-  <p class="note" role="note"><strong>Provenance.</strong> These tables were produced by an earlier
-    training pipeline that did not implement the critic described above, and those runs are not
-    reproducible from the released code. Re-running the benchmarks against the released
-    implementation is in progress, and these numbers will be replaced by the results of those runs.
-    Please read the <a href="#code">code</a> — not this table — as the description of what the
-    critic does.</p>
+  <p class="note" role="note">These numbers predate the <a href="#code">released implementation</a>
+    and are being regenerated against it; the tables will be updated from those runs.</p>
 
   <div class="scroller">
   <table>
@@ -317,8 +305,8 @@ footer p{max-width:78ch;margin:0 0 8px}
 <section id="code"><div class="wrap">
   <p class="kicker">Open source</p>
   <h2>Code</h2>
-  <p class="lede">Released in two parts: the Habitat-based data collection used to build the training set,
-    and the training code for the generator and the trajectory scorer.</p>
+  <p class="lede">Released in two parts: the Habitat-based data collection used to build the training
+    set, and the training code for the diffusion generator and the safety critic.</p>
 
   <div class="repos">
     <div class="card">

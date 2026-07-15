@@ -116,11 +116,15 @@ h3.sub{font-size:17px;font-weight:640;letter-spacing:-.01em;margin:44px 0 6px}
 
 /* ---------- tables ---------- */
 .scroller{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{border-collapse:collapse;width:100%;min-width:640px;font-size:14.5px;
-  font-variant-numeric:tabular-nums}
+/* width:auto keeps columns snug around their contents -- at width:100% the
+   table stretched to the full wrap and the numbers scattered to the column
+   edges. margin-inline:0 keeps its left edge on the same line as the section
+   heading and lede, which are left-aligned. */
+table{border-collapse:collapse;width:auto;min-width:min(640px,100%);max-width:100%;
+  margin-inline:0;font-size:14.5px;font-variant-numeric:tabular-nums}
 caption{text-align:left;color:var(--dim);font-size:13.5px;padding-bottom:10px}
-th,td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
-th:first-child,td:first-child{text-align:left}
+th,td{padding:9px 18px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left;padding-left:4px}
 thead th{color:var(--muted);font-weight:600;font-size:12.5px;letter-spacing:.04em;
   text-transform:uppercase;border-bottom:1px solid var(--line)}
 .grp{border-left:1px solid var(--line)}
@@ -177,7 +181,7 @@ footer p{max-width:78ch;margin:0 0 8px}
       Paper (arXiv)</a>
     <a class="btn" href="#demo">
       <svg viewBox="0 0 16 16"><path d="M5 3l8 5-8 5z"/></svg> Video</a>
-    <a class="btn" href="https://github.com/junyi2005/navdp-safety-critic" target="_blank" rel="noopener">
+    <a class="btn" href="https://github.com/junyi2005/safety-critic" target="_blank" rel="noopener">
       <svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 00-2.5 15.6c.4.1.5-.2.5-.4v-1.4c-2 .5-2.5-.9-2.5-.9-.4-.9-.9-1.1-.9-1.1-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.2 1.9.9 2.3.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-3.9 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.5 7.5 0 014 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 1.9.1 2.1.5.5.8 1.2.8 2.1 0 3-1.8 3.7-3.6 3.9.3.3.5.7.5 1.5v2.2c0 .2.1.5.6.4A8 8 0 008 0z"/></svg>
       Code</a>
   </div>
@@ -308,33 +312,6 @@ footer p{max-width:78ch;margin:0 0 8px}
       and passes (right).</figcaption>
   </figure>
 
-  <div style="height:38px"></div>
-
-  <h3 class="sub">Candidate sets in simulation</h3>
-  <p class="lede">Each clip pairs the robot's RGB view with the <em>K</em>&nbsp;=&nbsp;16 sampled
-    trajectories, coloured by the score the critic assigns them.</p>
-  <div class="two">
-    <div>
-      <video src="assets/video/viz1.mp4" poster="assets/img/viz1_poster.jpg"
-             controls playsinline preload="none" muted loop></video>
-      <figcaption>Living room — the candidate set fans out toward open floor.</figcaption>
-    </div>
-    <div>
-      <video src="assets/video/viz2.mp4" poster="assets/img/viz2_poster.jpg"
-             controls playsinline preload="none" muted loop></video>
-      <figcaption>Same room, wider spread as the goal direction opens up.</figcaption>
-    </div>
-    <div>
-      <video src="assets/video/viz3.mp4" poster="assets/img/viz3_poster.jpg"
-             controls playsinline preload="none" muted loop></video>
-      <figcaption>Hallway — candidates commit to a consistent diagonal.</figcaption>
-    </div>
-    <div>
-      <video src="assets/video/viz4.mp4" poster="assets/img/viz4_poster.jpg"
-             controls playsinline preload="none" muted loop></video>
-      <figcaption>Kitchen — candidates against the occupancy of the counter island.</figcaption>
-    </div>
-  </div>
 </div></section>
 
 <section id="code"><div class="wrap">
@@ -346,7 +323,7 @@ footer p{max-width:78ch;margin:0 0 8px}
   <div class="repos">
     <div class="card">
       <span class="tag">Data collection</span>
-      <h3><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 100 16A8 8 0 008 0z" opacity=".25"/><path d="M4 8h8M8 4v8"/></svg>navdp-data-collection</h3>
+      <h3><svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 100 16A8 8 0 008 0z" opacity=".25"/><path d="M4 8h8M8 4v8"/></svg>data-collection</h3>
       <p>Collects paired RGB-D observations and smooth navigable trajectories from HM3D, MP3D and Gibson
         scenes.</p>
       <ul>
@@ -355,12 +332,12 @@ footer p{max-width:78ch;margin:0 0 8px}
         <li>Cubic-spline smoothing and obstacle-clearance refinement</li>
         <li>Domain randomization of camera height and pitch</li>
       </ul>
-      <p class="go"><a href="https://github.com/junyi2005/navdp-data-collection" target="_blank" rel="noopener">Repository →</a></p>
+      <p class="go"><a href="https://github.com/junyi2005/data-collection" target="_blank" rel="noopener">Repository →</a></p>
     </div>
 
     <div class="card">
       <span class="tag">Training</span>
-      <h3><svg viewBox="0 0 16 16"><path d="M2 2h12v12H2z" opacity=".25"/><path d="M5 8h6M8 5v6"/></svg>navdp-safety-critic</h3>
+      <h3><svg viewBox="0 0 16 16"><path d="M2 2h12v12H2z" opacity=".25"/><path d="M5 8h6M8 5v6"/></svg>safety-critic</h3>
       <p>Trains the diffusion generator, then the safety critic as a teacher, then distils it into
         the RGB-D selector.</p>
       <ul>
@@ -369,7 +346,7 @@ footer p{max-width:78ch;margin:0 0 8px}
         <li>Adversarial teacher training against A*-sampled non-expert trajectories</li>
         <li>Student distillation: RGB-D only, no ESDF at inference</li>
       </ul>
-      <p class="go"><a href="https://github.com/junyi2005/navdp-safety-critic" target="_blank" rel="noopener">Repository →</a></p>
+      <p class="go"><a href="https://github.com/junyi2005/safety-critic" target="_blank" rel="noopener">Repository →</a></p>
     </div>
   </div>
 </div></section>

@@ -71,10 +71,10 @@ Two dependencies are not on PyPI and must be installed separately:
 ## Data
 
 Training data comes from the companion repository
-**[habitat-lab-navdp](https://github.com/junyi2005/habitat-lab-navdp)**, kept
-separate because it is a fork of [habitat-lab](https://github.com/facebookresearch/habitat-lab).
-It collects paired RGB-D observations and smooth navigable trajectories from
-HM3D, MP3D and Gibson:
+**[navdp-data-collection](https://github.com/junyi2005/navdp-data-collection)**,
+which builds on [habitat-lab](https://github.com/facebookresearch/habitat-lab)
+and is kept separate for that reason. It collects paired RGB-D observations and
+smooth navigable trajectories from HM3D, MP3D and Gibson:
 
 - random start–goal sampling with automatic per-floor detection,
 - shortest-path planning over the habitat-sim navmesh,
@@ -86,7 +86,7 @@ It writes one folder per scene (`rgb.pkl`, `depth.pkl`, `traj.pkl`,
 `--data_root` at the directory holding them.
 
 ```bash
-git clone https://github.com/junyi2005/habitat-lab-navdp
+git clone https://github.com/junyi2005/navdp-data-collection
 # see its docs/data_collection.md for the collection walkthrough
 ```
 

@@ -1,6 +1,6 @@
 # safety-critic
 
-Reference implementation of the context-conditioned safety critic for
+Reference PyTorch implementation of the context-conditioned safety critic for
 diffusion-based visual navigation: a diffusion generator proposes `K` candidate
 trajectories from RGB-D observations, and a learnable critic with a
 trajectory-dependent clearance budget selects among them. ESDF is used only
